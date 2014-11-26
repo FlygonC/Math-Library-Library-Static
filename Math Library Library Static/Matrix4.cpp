@@ -297,3 +297,28 @@ Matrix4 static CreateTranslationM4(float X, float Y, float Z) {
 	Return.values[3][3] = 1;
 	return Return;
 }
+
+// Orthographic Projection Matrix ----------------------
+Matrix4 static OrthographicProjectionMatrix(float right, float left, float top, float bottom, float far, float near) {
+	Matrix4 Return;
+	Return.values[0][0] = 2 / (right - left);
+	Return.values[0][1] = 0;
+	Return.values[0][2] = 0;
+	Return.values[0][3] = 0;
+
+	Return.values[1][0] = 0;
+	Return.values[1][1] = 2 / (top - bottom);
+	Return.values[1][2] = 0;
+	Return.values[1][3] = 0;
+
+	Return.values[2][0] = 0;
+	Return.values[2][1] = 0;
+	Return.values[2][2] = -2 / (far - near);
+	Return.values[2][3] = 0;
+
+	Return.values[3][0] = -((right + left) / (right - left));
+	Return.values[3][1] = -((top + bottom) / (top - bottom));
+	Return.values[3][2] = ((far + near) / (far - near));
+	Return.values[3][3] = 1;
+	return Return;
+}
